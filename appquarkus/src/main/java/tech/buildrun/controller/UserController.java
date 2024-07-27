@@ -33,5 +33,11 @@ public class UserController {
     public Response createUser(UserEntity userEntity) {
         return Response.ok(userService.createUser(userEntity)).build();
     }
+
+    @GET
+    @Path("/{id}")
+    public Response findById(@PathParam("id") UUID userId) {
+        return Response.ok(userService.findById(userId)).build();
+    }
 }
 

@@ -1,9 +1,12 @@
 package tech.buildrun.service;
 
+import io.vertx.ext.auth.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import tech.buildrun.entity.UserEntity;
+import tech.buildrun.exception.UserNotFoundException;
 
 import java.util.List;
+import java.util.UUID;
 
 @ApplicationScoped
 public class UserService {
@@ -17,5 +20,10 @@ public class UserService {
         return UserEntity.findAll()
                 .page(page, pageSize)
                 .list();
+    }
+
+    public UserEntity findById(UUID userId) {
+        return (UserEntity) UserEntity.findByIdOptional(userId)
+                .orElseThrow(UserNotFoundException::new);
     }
 }
