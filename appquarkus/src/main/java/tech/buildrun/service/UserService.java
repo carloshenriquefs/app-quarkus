@@ -36,4 +36,10 @@ public class UserService {
 
         return user;
     }
+
+    public void delete(UUID userId) {
+        var user = findById(userId);
+
+        UserEntity.deleteById(user.userId);
+    }
 }
