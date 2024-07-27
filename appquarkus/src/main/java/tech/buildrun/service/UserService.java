@@ -26,4 +26,14 @@ public class UserService {
         return (UserEntity) UserEntity.findByIdOptional(userId)
                 .orElseThrow(UserNotFoundException::new);
     }
+
+    public UserEntity updateUser(UUID userId, UserEntity userEntity) {
+        var user = findById(userId);
+
+        user.username = userEntity.username;
+
+        UserEntity.persist(user);
+
+        return user;
+    }
 }
